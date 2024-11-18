@@ -9,6 +9,8 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 contract Elig is ERC20, Ownable {
     address[] public eligAddresses;
 
+    // error Elig_notEnoughBalance();
+
     constructor(
         string memory name,
         string memory symbol,
@@ -24,7 +26,7 @@ contract Elig is ERC20, Ownable {
         eligAddresses = receivers;
         uint256 totalAmount = receivers.length * amount;
 
-        require(balanceOf(msg.sender) >= totalAmount, "Not enough tokens!!");
+        require(balanceOf(msg.sender) >= totalAmount, "Not Enough Balance!!!");
 
         for (uint256 i = 0; i < receivers.length; i++) {
             _transfer(msg.sender, receivers[i], amount);

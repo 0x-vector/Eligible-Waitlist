@@ -18,7 +18,7 @@ contract DeployElig is Script {
         // Start braodcast on private key of deployer.
         vm.startBroadcast();
 
-        Elig elig = new Elig(tokenName, tokenSymbol, initialSupply);
+        elig = new Elig(tokenName, tokenSymbol, initialSupply);
 
         vm.stopBroadcast();
         // Stop braodcast on private key of deployer.

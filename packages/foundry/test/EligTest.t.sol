@@ -18,7 +18,6 @@ contract EligTest is Test {
     function setUp() public {
         // DeployElig deployElig = new DeployElig();
         owner = address(this);
-        eligAddresses = [USER, USER2];
         elig = new Elig("Eligible", "ELIG", 1000000000);
         vm.deal(owner, TOTAL_SUPPLY);
     }
@@ -31,5 +30,14 @@ contract EligTest is Test {
         // check total supply and owner's balance equals initial supply;
         assertEq(elig.totalSupply(), TOTAL_SUPPLY);
         assertEq(elig.balanceOf(owner), TOTAL_SUPPLY);
+    }
+
+    function testTransferIsWorking() public {
+        eligAddresses = [USER, USER2];
+        elig.transferTokens(USER, SENDING_AMOUNT);
+
+        // check if amount sent equals the amount recieved.
+        assertEq(elig.balanceOf(owner), TOTAL_SUPPLY - SENDING_AMOUNT);
+        assertEq(elig.balanceOf(USER), SENDING_AMOUNT);
     }
 }
